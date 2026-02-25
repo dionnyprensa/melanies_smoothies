@@ -16,7 +16,7 @@ st.write("The name on your Smoothie will be:", name_on_order)
 
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
-# st.dataframe(my_dataframe, width=True)
+# st.dataframe(my_dataframe, use_container_width=True)
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredientes:'
@@ -29,7 +29,7 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + " "
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-        sf_df = st.dataframe(data=smoothiefroot_response.json(), width=True)
+        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
         
     #st.write(ingredients_string)
     my_insert_stmt = f"""INSERT INTO smoothies.public.ORDERS(name_on_order, ingredients) 
@@ -44,4 +44,4 @@ if ingredients_list:
 
 # smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 # st.text(smoothiefroot_response.json())
-# sf_df = st.dataframe(data=smoothiefroot_response.json(), width=True)
+# sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
